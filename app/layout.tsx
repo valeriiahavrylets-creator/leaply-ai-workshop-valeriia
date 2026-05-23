@@ -1,10 +1,19 @@
-import { Geist_Mono, Figtree } from "next/font/google"
+import { Geist_Mono, Inter, Playfair_Display } from "next/font/google"
 
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { cn } from "@/lib/utils"
 
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" })
+const fontSans = Inter({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-sans",
+})
+
+const fontHeading = Playfair_Display({
+  subsets: ["latin", "cyrillic"],
+  variable: "--font-heading",
+  weight: ["600", "700", "800", "900"],
+})
 
 const fontMono = Geist_Mono({
   subsets: ["latin"],
@@ -18,17 +27,18 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="uk"
       suppressHydrationWarning
       className={cn(
-        "antialiased",
+        "dark antialiased",
+        fontSans.variable,
+        fontHeading.variable,
         fontMono.variable,
-        "font-sans",
-        figtree.variable
+        "font-sans"
       )}
     >
       <body>
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider forcedTheme="dark">{children}</ThemeProvider>
       </body>
     </html>
   )

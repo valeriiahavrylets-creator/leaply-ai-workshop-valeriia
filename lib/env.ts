@@ -8,11 +8,12 @@ const EnvSchema = z.object({
     .enum(["development", "test", "production"])
     .default("development"),
 
-  // Example public var (safe to expose to the browser):
-  // NEXT_PUBLIC_APP_URL: z.string().url(),
+  // Google AI Studio API key for Gemini. Server-only.
+  GOOGLE_GENERATIVE_AI_API_KEY: z.string().min(1),
 
-  // Example server-only secret (never NEXT_PUBLIC_):
-  // OPENAI_API_KEY: z.string().min(1),
+  // Optional comma-separated pool of additional keys used as fallbacks
+  // when the primary fails (rate limit, revoked, etc).
+  GOOGLE_GENERATIVE_AI_API_KEYS: z.string().optional(),
 })
 
 export const env = EnvSchema.parse(process.env)
